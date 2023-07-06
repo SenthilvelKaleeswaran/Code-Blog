@@ -5,6 +5,15 @@ import Link from 'next/link';
 function NavBar() {
     const [author, setAuthor] = useState('');
 
+    // const router = useRouter()
+
+    const handleLogout = () => {
+
+            localStorage.setItem('author', '')
+            setAuthor('')
+    }
+
+    
     useEffect(() => {
         const storedAuthor = localStorage.getItem('author') || '';
         setAuthor(storedAuthor);
@@ -31,6 +40,16 @@ function NavBar() {
                     {author && (
                         <Link href={`/myPost/${author}`} passHref>
                             <p className="text-white hover:bg-orange-600 hover:text-white  px-3 py-2 rounded-md">My Post</p>
+                        </Link>
+                    )}
+                    {author && (
+                        <Link href={`/api/auth/logout`} passHref>
+                            <p onClick={handleLogout} className="text-white hover:bg-orange-600 hover:text-white  px-3 py-2 rounded-md">Log Out</p>
+                        </Link>
+                    )}
+                    {!author && (
+                        <Link href={`/api/auth/login`} passHref>
+                            <p className="text-white hover:bg-orange-600 hover:text-white  px-3 py-2 rounded-md">Log In</p>
                         </Link>
                     )}
                 </div>

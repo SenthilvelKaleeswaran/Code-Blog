@@ -26,9 +26,11 @@ export default function EditPost() {
       setEditPost(res.post)
 
     }
-    getPost()
 
-  }, [])
+    if(postId)
+      getPost()
+
+  },[postId])
 
 
   const onChange = (event: ChangeEvent<HTMLTextAreaElement> | ChangeEvent<HTMLInputElement>) => {

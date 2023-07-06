@@ -1,15 +1,13 @@
 "use client"
 
-import { useParams } from "next/navigation";
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 
-export default function SinglePost({ postId }: { postId: string }) {
+export default function SinglePost({ params }: { params: { postId : string } }) {
 
-    const param = useParams()
     const router = useRouter()
 
-    const id = param.postId || {}
+    const  { postId } = params
 
     const [singlePost, setSinglePost] = useState({
         title: '',
@@ -22,12 +20,12 @@ export default function SinglePost({ postId }: { postId: string }) {
 
     useEffect(() => {
         const getSinglePost = async () => {
-            const posts = await fetch(`/api/posts/${id}`)
+            const posts = await fetch(`/api/posts/${postId}`)
             const res = await posts.json()
             setSinglePost(res.post)
         }
         getSinglePost()
-    }, [])
+    }, [postId])
 
 
     const { author } = singlePost

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 
 export default function GetMySinglePost({ params }: { params: { postId: string } }) {
 
-    const { postId } = params;
+    const { postId } = params
     const router = useRouter()
 
     const [singlePost, setSinglePost] = useState({
